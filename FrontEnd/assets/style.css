@@ -133,7 +133,11 @@ body {
   margin: auto;
   font-family: "Work Sans";
   font-size: 14px;
+  background-color: #faf8f5;
 }
+
+/* HEADER */
+
 header {
   display: flex;
   justify-content: space-between;
@@ -169,14 +173,28 @@ nav ul {
   align-items: center;
   list-style-type: none;
 }
+nav img {
+  width: 22px;
+  height: 22px;
+}
 nav li {
   padding: 0 10px;
   font-size: 1.2em;
 }
-
-li:hover {
-  color: #b1663c;
+nav li a {
+  text-decoration: none;
+  color: black;
 }
+nav li a:hover {
+  color: #b1663c;
+  cursor: pointer;
+}
+.active-nav {
+  font-weight: bold;
+}
+
+/* MAIN */
+
 #introduction {
   display: flex;
   align-items: center;
@@ -205,6 +223,9 @@ li:hover {
   margin-bottom: 52px;
   margin-top: 139px;
 }
+
+/* FILTERS */
+
 #filters {
   display: flex;
   justify-content: center;
@@ -218,7 +239,6 @@ li:hover {
   font-weight: bold;
   font-size: 16px;
   font-family: "Syne";
-
   background-color: transparent;
   border: 2px solid #1d6154;
 }
@@ -231,6 +251,9 @@ li:hover {
   color: white;
   cursor: pointer;
 }
+
+/* GALLERY */
+
 .gallery {
   width: 100%;
   display: grid;
@@ -246,6 +269,9 @@ li:hover {
   font-size: 13px;
   margin-top: 7px;
 }
+
+/* CONTACT */
+
 #contact {
   width: 50%;
   margin: auto;
@@ -288,8 +314,80 @@ input[type="submit"] {
   border-radius: 60px;
 }
 
+/* PAGE LOGIN */
+
+#login {
+  width: 50%;
+  margin: auto;
+}
+
+#login > * {
+  text-align: center;
+}
+#login h2 {
+  margin-top: 80px;
+  margin-bottom: 52px;
+}
+#login form {
+  text-align: left;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+#login input {
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  height: 51px;
+}
+#login .input-group {
+  width: 379px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+#login label {
+  margin: 2em 0 1em 0;
+}
+
+#login button {
+  margin: 37px auto 28px auto;
+  width: 179px;
+  height: 36px;
+  color: white;
+  background-color: #1d6154;
+  border-radius: 60px;
+  border: none;
+}
+#login button:hover {
+  cursor: pointer;
+}
+#login .forgotten-passwords {
+  text-align: center;
+  color: black;
+  text-decoration: underline;
+}
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.login-page main {
+  flex: 1;
+}
+
+/* FOOTER */
+
+footer {
+}
 footer nav ul {
   display: flex;
   justify-content: flex-end;
   margin: 2em;
+  background-color: #faf8f5;
 }
