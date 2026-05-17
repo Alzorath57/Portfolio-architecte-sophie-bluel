@@ -47,24 +47,35 @@ async function getCategories() {
 function displayCategories(categories) {
   const filters = document.getElementById("filters");
   const allBtn = document.createElement("button");
+  allBtn.classList.add("active");
+  allBtn.classList.add("filter-btn");
   allBtn.textContent = "Tous";
   filters.appendChild(allBtn);
   allBtn.addEventListener("click", function () {
     document.querySelector(".gallery").innerHTML = "";
     displayWorks(works);
+    document.querySelectorAll(".filter-btn").forEach((btn) => {
+      btn.classList.remove("active");
+    });
+    allBtn.classList.add("active");
   });
 
-  categories.forEach((categorie) => {
+  categories.forEach((category) => {
     const button = document.createElement("button");
-    button.textContent = categorie.name;
+    button.classList.add("filter-btn");
+    button.textContent = category.name;
     filters.appendChild(button);
 
     button.addEventListener("click", function () {
       document.querySelector(".gallery").innerHTML = "";
       const filteredWorks = works.filter(
-        (work) => work.categoryId === categorie.id,
+        (work) => work.categoryId === category.id,
       );
       displayWorks(filteredWorks);
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.classList.remove("active");
+      });
+      button.classList.add("active");
     });
   });
 }
