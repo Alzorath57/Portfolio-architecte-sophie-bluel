@@ -1,15 +1,16 @@
+let works = [];
 // Récupère les travaux depuis l'API
 
 async function getWorks() {
   const response = await fetch("http://localhost:5678/api/works");
-  const works = await response.json();
+  works = await response.json();
   return works;
 }
 
 // ========== INITIALISATION ==========
 
 async function init() {
-  const works = await getWorks();
+  works = await getWorks();
   displayWorks(works);
   const categories = await getCategories();
   displayCategories(categories);
@@ -19,6 +20,7 @@ async function init() {
 
 function displayWorks(works) {
   const gallery = document.querySelector(".gallery");
+
   works.forEach((work) => {
     const figure = document.createElement("figure");
     const image = document.createElement("img");
@@ -44,8 +46,26 @@ async function getCategories() {
 
 function displayCategories(categories) {
   const filters = document.getElementById("filters");
-  const allBouton = document.createElement("button");
-  allBouton.textContent = "Tous";
-  filters.appendChild(allBouton);
+  const allBtn = document.createElement("button");
+  allBtn.textContent = "Tous";
+  filters.appendChild(allBtn);
+  allBtn.addEventListener("click", function () {
+    document.querySelector(".gallery").innerHTML = "";
+    displayWorks(works);
+  });
+
+  categories.forEach((categorie) => {
+    const button = document.createElement("button");
+    button.textContent = categorie.name;
+    filters.appendChild(button);
+
+    button.addEventListener("click", function () {
+      document.querySelector(".gallery").innerHTML = "";
+      const filteredWorks = works.filter(
+        (work) => work.categoryId === categorie.id,
+      );
+      displayWorks(filteredWorks);
+    });
+  });
 }
 init();
