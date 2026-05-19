@@ -133,7 +133,7 @@ body {
   margin: auto;
   font-family: "Work Sans";
   font-size: 14px;
-  background-color: #faf8f5;
+  background-color: #fffef8;
 }
 
 /* HEADER */
@@ -184,6 +184,7 @@ nav li {
 nav li a {
   text-decoration: none;
   color: black;
+  margin: 16px;
 }
 nav li a:hover {
   color: #b1663c;
@@ -334,7 +335,6 @@ input[type="submit"] {
   display: flex;
   flex-direction: column;
 }
-
 #login input {
   font-size: 1.2em;
   border: none;
@@ -384,10 +384,10 @@ input[type="submit"] {
 /* FOOTER */
 
 footer {
+  background-color: #faf8f5;
 }
 footer nav ul {
   display: flex;
   justify-content: flex-end;
   margin: 2em;
-  background-color: #faf8f5;
 }
