@@ -34,9 +34,24 @@ async function init() {
     editButton.innerHTML =
       '<i class="fa-regular fa-pen-to-square"></i> modifier';
     document.querySelector("#portfolio-title").appendChild(editButton);
+    const modal = document.createElement("div");
+    modal.id = "modal";
+    document.body.appendChild(modal);
+    editButton.addEventListener("click", function () {
+      modal.style.display = "flex";
+    });
+    const modalContent = document.createElement("div");
+    modalContent.id = "modal-content";
+    modal.appendChild(modalContent);
+    const closeButton = document.createElement("button");
+    closeButton.id = "close-button";
+    closeButton.textContent = "✕";
+    modalContent.appendChild(closeButton);
+    closeButton.addEventListener("click", function () {
+      modal.style.display = "none";
+    });
   }
 }
-
 // Affiche les travaux dans la galerie
 
 function displayWorks(works) {
