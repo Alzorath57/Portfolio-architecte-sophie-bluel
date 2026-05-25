@@ -29,6 +29,11 @@ async function init() {
     editBanner.innerHTML =
       '<i class="fa-regular fa-pen-to-square"></i> Mode édition';
     document.body.prepend(editBanner);
+    const editButton = document.createElement("button");
+    editButton.id = "edit-button";
+    editButton.innerHTML =
+      '<i class="fa-regular fa-pen-to-square"></i> modifier';
+    document.querySelector("#portfolio-title").appendChild(editButton);
   }
 }
 
