@@ -24,6 +24,11 @@ async function init() {
       localStorage.removeItem("token");
       window.location.href = "login.html";
     });
+    const editBanner = document.createElement("div");
+    editBanner.id = "edit-banner";
+    editBanner.innerHTML =
+      '<i class="fa-regular fa-pen-to-square"></i> Mode édition';
+    document.body.prepend(editBanner);
   }
 }
 

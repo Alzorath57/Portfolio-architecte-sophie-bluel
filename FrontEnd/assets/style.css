@@ -136,6 +136,17 @@ body {
   background-color: #fffef8;
 }
 
+/* BANNER */
+
+#edit-banner {
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
 /* HEADER */
 
 header {
@@ -384,10 +395,17 @@ input[type="submit"] {
 /* FOOTER */
 
 footer {
-  background-color: #faf8f5;
+  background-color: white;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
 }
 footer nav ul {
   display: flex;
   justify-content: flex-end;
-  margin: 2em;
+  padding: 20px;
+  margin-right: 50px;
+}
+
+footer nav ul li {
+  font-size: 14px;
 }
