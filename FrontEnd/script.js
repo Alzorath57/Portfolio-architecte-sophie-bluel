@@ -1,4 +1,7 @@
 let works = [];
+// Lis le token dans le local storage
+const token = localStorage.getItem("token");
+
 // Récupère les travaux depuis l'API
 
 async function getWorks() {
@@ -14,6 +17,14 @@ async function init() {
   displayWorks(works);
   const categories = await getCategories();
   displayCategories(categories);
+  if (token) {
+    const loginLink = document.getElementById("login-link");
+    loginLink.textContent = "logout";
+    loginLink.addEventListener("click", function () {
+      localStorage.removeItem("token");
+      window.location.href = "login.html";
+    });
+  }
 }
 
 // Affiche les travaux dans la galerie
