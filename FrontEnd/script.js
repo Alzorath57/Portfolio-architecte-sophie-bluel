@@ -39,6 +39,7 @@ async function init() {
     document.body.appendChild(modal);
     editButton.addEventListener("click", function () {
       modal.style.display = "flex";
+      displayModalWorks(works);
     });
     const modalContent = document.createElement("div");
     modalContent.id = "modal-content";
@@ -50,6 +51,9 @@ async function init() {
     closeButton.addEventListener("click", function () {
       modal.style.display = "none";
     });
+    const modalGallery = document.createElement("div");
+    modalGallery.id = "modal-gallery";
+    modalContent.appendChild(modalGallery);
   }
 }
 // Affiche les travaux dans la galerie
@@ -113,6 +117,20 @@ function displayCategories(categories) {
       });
       button.classList.add("active");
     });
+  });
+}
+
+// Affiche les images dans le modal
+
+function displayModalWorks(works) {
+  const modalGallery = document.getElementById("modal-gallery");
+  modalGallery.innerHTML = "";
+  works.forEach((work) => {
+    const figure = document.createElement("figure");
+    const image = document.createElement("img");
+    figure.appendChild(image);
+    image.src = work.imageUrl;
+    modalGallery.appendChild(figure);
   });
 }
 init();

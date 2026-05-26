@@ -284,6 +284,18 @@ nav li a:hover {
   right: 10px;
   cursor: pointer;
 }
+#modal-gallery {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(5, 79px);
+  gap: 10px;
+  width: 100%;
+}
+#modal-gallery img {
+  width: 79px;
+  height: 105px;
+  object-fit: cover;
+}
 
 /* FILTERS */
 
