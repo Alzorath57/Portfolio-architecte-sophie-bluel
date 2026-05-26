@@ -64,7 +64,7 @@ async function init() {
 
 function displayWorks(works) {
   const gallery = document.querySelector(".gallery");
-
+  gallery.innerHTML = "";
   works.forEach((work) => {
     const figure = document.createElement("figure");
     const image = document.createElement("img");
@@ -96,7 +96,6 @@ function displayCategories(categories) {
   allBtn.textContent = "Tous";
   filters.appendChild(allBtn);
   allBtn.addEventListener("click", function () {
-    document.querySelector(".gallery").innerHTML = "";
     displayWorks(works);
     document.querySelectorAll(".filter-btn").forEach((btn) => {
       btn.classList.remove("active");
@@ -111,7 +110,6 @@ function displayCategories(categories) {
     filters.appendChild(button);
 
     button.addEventListener("click", function () {
-      document.querySelector(".gallery").innerHTML = "";
       const filteredWorks = works.filter(
         (work) => work.categoryId === category.id,
       );
@@ -126,15 +124,35 @@ function displayCategories(categories) {
 
 // Affiche les images dans le modal
 
-function displayModalWorks(works) {
+function displayModalWorks(worksToDisplay) {
   const modalGallery = document.getElementById("modal-gallery");
   modalGallery.innerHTML = "";
-  works.forEach((work) => {
+  worksToDisplay.forEach((work) => {
     const figure = document.createElement("figure");
     const image = document.createElement("img");
     figure.appendChild(image);
     image.src = work.imageUrl;
     modalGallery.appendChild(figure);
+    const deleteButton = document.createElement("button");
+    deleteButton.classList.add("delete-button");
+    deleteButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+    figure.appendChild(deleteButton);
+    deleteButton.addEventListener("click", async function () {
+      const response = await fetch(
+        `http://localhost:5678/api/works/${work.id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      if (response.ok) {
+        figure.remove();
+        works = works.filter((w) => w.id !== work.id);
+        displayWorks(works);
+      }
+    });
   });
 }
 init();

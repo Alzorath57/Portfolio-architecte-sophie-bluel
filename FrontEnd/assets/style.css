@@ -303,6 +303,20 @@ nav li a:hover {
   margin: 60px;
   font-weight: 400;
 }
+#modal-gallery figure {
+  position: relative;
+}
+.delete-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: black;
+  color: white;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
 
 /* FILTERS */
 
