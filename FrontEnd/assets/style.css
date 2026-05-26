@@ -296,6 +296,13 @@ nav li a:hover {
   height: 105px;
   object-fit: cover;
 }
+#modal-title {
+  font-size: 26px;
+  color: black;
+  text-align: center;
+  margin: 60px;
+  font-weight: 400;
+}
 
 /* FILTERS */
 

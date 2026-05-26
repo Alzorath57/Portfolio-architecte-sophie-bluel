@@ -51,8 +51,12 @@ async function init() {
     closeButton.addEventListener("click", function () {
       modal.style.display = "none";
     });
+    const modalTitle = document.createElement("h3");
+    modalTitle.textContent = "Galerie photo";
+    modalTitle.id = "modal-title";
     const modalGallery = document.createElement("div");
     modalGallery.id = "modal-gallery";
+    modalContent.appendChild(modalTitle);
     modalContent.appendChild(modalGallery);
   }
 }
