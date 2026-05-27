@@ -132,21 +132,23 @@ async function init() {
     imageInput.accept = "image/png, image/jpeg";
 
     imageInput.addEventListener("change", function () {
-      // Modifie l'image existante si l'utilisateur sélectionne une nouvelle image
-      const existingImage = document.getElementById("file-image");
-      if (existingImage) {
-        existingImage.remove();
-      }
-      imageInfo.style.display = "none";
-      imageLabel.style.display = "none";
-      const fileImage = document.createElement("img");
-      fileImage.id = "file-image";
-      fileImage.src = URL.createObjectURL(imageInput.files[0]);
+      if (imageInput.files[0]) {
+        // Modifie l'image existante si l'utilisateur sélectionne une nouvelle image
+        const existingImage = document.getElementById("file-image");
+        if (existingImage) {
+          existingImage.remove();
+        }
+        imageInfo.style.display = "none";
+        imageLabel.style.display = "none";
+        const fileImage = document.createElement("img");
+        fileImage.id = "file-image";
+        fileImage.src = URL.createObjectURL(imageInput.files[0]);
 
-      imagePreview.appendChild(fileImage);
-      fileImage.addEventListener("click", function () {
-        imageInput.click();
-      });
+        imagePreview.appendChild(fileImage);
+        fileImage.addEventListener("click", function () {
+          imageInput.click();
+        });
+      }
     });
 
     // Input pour le titre
