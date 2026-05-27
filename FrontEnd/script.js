@@ -187,6 +187,30 @@ async function init() {
     submitButton.textContent = "Valider";
     submitButton.id = "submit-button";
 
+    // Événement de soumission du formulaire
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault();
+      const formData = new FormData();
+      formData.append("image", imageInput.files[0]);
+      formData.append("title", titleInput.value);
+      formData.append("category", parseInt(categoryselect.value));
+      const response = await fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+      if (response.ok) {
+        const newWork = await response.json();
+        newWork.categoryId = parseInt(newWork.categoryId);
+        works.push(newWork);
+        displayWorks(works);
+        modalAdd.style.display = "none";
+        modal.style.display = "none";
+      }
+    });
+
     // Ajout des éléments dans la modale
     modalContent.appendChild(modalTitle);
     modalContent.appendChild(modalGallery);
