@@ -254,7 +254,7 @@ nav li a:hover {
   gap: 20px;
 }
 
-/* modal */
+/* MODAL */
 
 #modal {
   position: fixed;
@@ -318,6 +318,117 @@ nav li a:hover {
   padding: 5px;
 }
 
+#add-button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 50px;
+  background-color: #1d6154;
+  color: white;
+  border: none;
+  border-radius: 60px;
+  font-size: 16px;
+  font-family: "Syne";
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+
+/* SEPARATOR */
+
+#separator {
+  width: 420px;
+  border: none;
+  background-color: #b3b3b3;
+  height: 1px;
+  margin: 80px auto 0 auto;
+}
+#separator-form {
+  width: 420px;
+  border: none;
+  background-color: #b3b3b3;
+  height: 1px;
+  margin: 40px auto 0 auto;
+}
+/* FORMULAIRE D'AJOUT DE PROJET */
+
+#add-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+#back-button {
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+}
+#image-preview {
+  width: 420px;
+  height: 169px;
+  object-fit: cover;
+  background-color: #e8f1f6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+#image-preview label {
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+#image-preview label span {
+  background-color: #cbd6dc;
+  color: #306685;
+  width: 173px;
+  height: 36px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#image-preview label i {
+  font-size: 76px;
+  color: #b9c5cc;
+}
+#image-preview p {
+  font-size: 11px;
+  color: #444444;
+  margin-top: 8px;
+}
+#title-form {
+  width: 420px;
+  height: 50px;
+  font-size: 1.2em;
+}
+#category-form {
+  width: 420px;
+  height: 50px;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+#submit-button {
+  font-family: "Syne";
+  font-size: 17px;
+  width: 237px;
+  height: 36px;
+  color: white;
+  background-color: #1d6154;
+  border-radius: 60px;
+  border: none;
+  cursor: pointer;
+}
 /* FILTERS */
 
 #filters {
