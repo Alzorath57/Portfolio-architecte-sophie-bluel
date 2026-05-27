@@ -123,8 +123,31 @@ async function init() {
     imageInput.type = "file";
     imageInput.id = "image-form";
     imageInput.name = "image";
+
+    // Info sur les formats d'image acceptés
     const imageInfo = document.createElement("p");
     imageInfo.textContent = "jpg, png : 4mo max";
+
+    // Affiche un aperçu de l'image sélectionnée par l'utilisateur
+    imageInput.accept = "image/png, image/jpeg";
+
+    imageInput.addEventListener("change", function () {
+      // Modifie l'image existante si l'utilisateur sélectionne une nouvelle image
+      const existingImage = document.getElementById("file-image");
+      if (existingImage) {
+        existingImage.remove();
+      }
+      imageInfo.style.display = "none";
+      imageLabel.style.display = "none";
+      const fileImage = document.createElement("img");
+      fileImage.id = "file-image";
+      fileImage.src = URL.createObjectURL(imageInput.files[0]);
+
+      imagePreview.appendChild(fileImage);
+      fileImage.addEventListener("click", function () {
+        imageInput.click();
+      });
+    });
 
     // Input pour le titre
     const titleInput = document.createElement("input");

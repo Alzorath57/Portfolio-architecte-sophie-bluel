@@ -368,6 +368,7 @@ nav li a:hover {
   left: 20px;
   cursor: pointer;
 }
+/* Zone de prévisualisation de l'image avant l'ajout */
 #image-preview {
   width: 420px;
   height: 169px;
@@ -406,6 +407,13 @@ nav li a:hover {
   font-size: 11px;
   color: #444444;
   margin-top: 8px;
+}
+
+/* Image choisie par l'utilisateur */
+#file-image {
+  width: 129px;
+  height: 193px;
+  object-fit: cover;
 }
 #title-form {
   width: 420px;
