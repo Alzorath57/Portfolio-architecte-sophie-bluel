@@ -210,7 +210,17 @@ async function init() {
         modal.style.display = "none";
       }
     });
-
+    editButton.addEventListener("click", function () {
+      modalAdd.style.display = "none";
+      modalGallery.style.display = "grid";
+      addButton.style.display = "block";
+      separator.style.display = "block";
+      modalTitle.textContent = "Galerie photo";
+      imageLabel.style.display = "flex";
+      imageInfo.style.display = "block";
+      const existingImage = document.getElementById("file-image");
+      if (existingImage) existingImage.remove();
+    });
     // Ajout des éléments dans la modale
     modalContent.appendChild(modalTitle);
     modalContent.appendChild(modalGallery);
