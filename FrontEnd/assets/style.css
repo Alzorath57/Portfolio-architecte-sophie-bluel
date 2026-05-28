@@ -275,6 +275,7 @@ nav li a:hover {
   width: 630px;
   height: 688px;
   position: relative;
+  overflow-y: auto;
 }
 #close-button {
   background-color: transparent;

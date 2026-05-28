@@ -117,6 +117,14 @@ async function init() {
     const imageInput = document.createElement("input");
     const imageLabel = document.createElement("label");
     const imagePreview = document.createElement("div");
+    const imageError = document.createElement("p");
+
+    // Message d'erreur pour l'image
+    imageError.textContent = "Veuillez sélectionner une image.";
+    imageError.style.color = "red";
+    imageError.style.display = "none";
+
+    // Configuration de l'input d'image et de son aperçu
     imagePreview.id = "image-preview";
     imageInput.style.display = "none";
     imageLabel.innerHTML =
@@ -135,6 +143,8 @@ async function init() {
 
     imageInput.addEventListener("change", function () {
       if (imageInput.files[0]) {
+        imageError.style.display = "none";
+
         // Modifie l'image existante si l'utilisateur sélectionne une nouvelle image
         const existingImage = document.getElementById("file-image");
         if (existingImage) {
@@ -156,19 +166,45 @@ async function init() {
     // Input pour le titre
     const titleInput = document.createElement("input");
     const titleLabel = document.createElement("label");
+    const titleError = document.createElement("p");
+
+    // Message d'erreur pour le titre
+    titleError.textContent = "Le titre doit comporter au moins 2 caractères.";
+    titleError.style.color = "red";
+    titleError.style.display = "none";
+
+    // Validation du titre
     titleLabel.textContent = "Titre";
     titleLabel.htmlFor = "title-form";
     titleInput.type = "text";
     titleInput.id = "title-form";
     titleInput.name = "title";
+    titleInput.addEventListener("input", function () {
+      if (titleInput.value.trim().length >= 2) {
+        titleError.style.display = "none";
+      }
+    });
 
     // Input pour la catégorie
     const categoryselect = document.createElement("select");
     const categoryLabel = document.createElement("label");
+    const categoryError = document.createElement("p");
+
+    // Message d'erreur pour la catégorie
+    categoryError.textContent = "Veuillez sélectionner une catégorie.";
+    categoryError.style.color = "red";
+    categoryError.style.display = "none";
+
+    // Validation de la catégorie
     categoryLabel.textContent = "Catégorie";
     categoryLabel.htmlFor = "category-form";
     categoryselect.id = "category-form";
     categoryselect.name = "category";
+    categoryselect.addEventListener("change", function () {
+      if (categoryselect.value) {
+        categoryError.style.display = "none";
+      }
+    });
 
     // vide les catégories par defaut et ajoute une option vide
     const defaultOption = document.createElement("option");
@@ -192,10 +228,36 @@ async function init() {
     // Événement de soumission du formulaire
     form.addEventListener("submit", async function (event) {
       event.preventDefault();
+      let isValid = true;
+
+      if (!imageInput.files[0]) {
+        imageError.style.display = "block";
+        isValid = false;
+      } else {
+        imageError.style.display = "none";
+      }
+
+      if (titleInput.value.trim().length < 2) {
+        titleError.style.display = "block";
+        isValid = false;
+      } else {
+        titleError.style.display = "none";
+      }
+
+      if (!categoryselect.value) {
+        categoryError.style.display = "block";
+        isValid = false;
+      } else {
+        categoryError.style.display = "none";
+      }
+
+      if (!isValid) return;
       const formData = new FormData();
       formData.append("image", imageInput.files[0]);
       formData.append("title", titleInput.value);
       formData.append("category", parseInt(categoryselect.value));
+      titleError.style.display = "none";
+      categoryError.style.display = "none";
       const response = await fetch("http://localhost:5678/api/works", {
         method: "POST",
         headers: {
@@ -241,10 +303,13 @@ async function init() {
     imagePreview.appendChild(imageInfo);
     imagePreview.appendChild(imageInput);
     form.appendChild(imagePreview);
+    form.appendChild(imageError);
     form.appendChild(titleLabel);
     form.appendChild(titleInput);
+    form.appendChild(titleError);
     form.appendChild(categoryLabel);
     form.appendChild(categoryselect);
+    form.appendChild(categoryError);
     form.appendChild(separatorForm);
     form.appendChild(submitButton);
   }
@@ -341,6 +406,7 @@ function displayModalWorks(worksToDisplay) {
 
     // Événement de clic pour supprimer une image
     deleteButton.addEventListener("click", async function () {
+      if (!confirm("Voulez-vous vraiment supprimer cette photo ?")) return;
       const response = await fetch(
         `http://localhost:5678/api/works/${work.id}`,
         {
