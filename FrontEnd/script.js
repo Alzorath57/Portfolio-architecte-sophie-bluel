@@ -1,6 +1,8 @@
 let works = [];
 // Lis le token dans le local storage
 const token = localStorage.getItem("token");
+// Variable pour suivre la catégorie active
+let activeCategory = null;
 
 // Récupère les travaux depuis l'API
 async function getWorks() {
@@ -205,7 +207,13 @@ async function init() {
         const newWork = await response.json();
         newWork.categoryId = parseInt(newWork.categoryId);
         works.push(newWork);
-        displayWorks(works);
+        titleInput.value = "";
+        categoryselect.value = "";
+        if (activeCategory) {
+          displayWorks(works.filter((w) => w.categoryId === activeCategory));
+        } else {
+          displayWorks(works);
+        }
         modalAdd.style.display = "none";
         modal.style.display = "none";
       }
@@ -279,6 +287,7 @@ function displayCategories(categories) {
   filters.appendChild(allBtn);
   allBtn.addEventListener("click", function () {
     displayWorks(works);
+    activeCategory = null;
 
     // Met à jour l'état actif des boutons
     document.querySelectorAll(".filter-btn").forEach((btn) => {
@@ -300,7 +309,7 @@ function displayCategories(categories) {
         (work) => work.categoryId === category.id,
       );
       displayWorks(filteredWorks);
-
+      activeCategory = category.id;
       // Met à jour l'état actif des boutons
       document.querySelectorAll(".filter-btn").forEach((btn) => {
         btn.classList.remove("active");
@@ -345,7 +354,11 @@ function displayModalWorks(worksToDisplay) {
       if (response.ok) {
         figure.remove();
         works = works.filter((w) => w.id !== work.id);
-        displayWorks(works);
+        if (activeCategory) {
+          displayWorks(works.filter((w) => w.categoryId === activeCategory));
+        } else {
+          displayWorks(works);
+        }
       }
     });
   });
