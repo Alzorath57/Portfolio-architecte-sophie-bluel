@@ -61,6 +61,9 @@ async function init() {
     modalContent.appendChild(closeButton);
     closeButton.addEventListener("click", function () {
       modal.style.display = "none";
+      imageError.style.display = "none";
+      titleError.style.display = "none";
+      categoryError.style.display = "none";
     });
 
     // Titre du modal
