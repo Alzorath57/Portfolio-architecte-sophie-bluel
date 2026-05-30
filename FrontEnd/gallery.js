@@ -1,8 +1,6 @@
 import { deleteWork } from "./api.js";
 import { state } from "./state.js";
 
-const token = localStorage.getItem("token");
-
 // Affiche les travaux dans la galerie avec leurs images et leurs titres
 export function displayWorks(works) {
   // Vide la galerie avant d'afficher les travaux
@@ -45,7 +43,7 @@ export function displayModalWorks(worksToDisplay) {
     // Événement de clic pour supprimer une image
     deleteButton.addEventListener("click", async function () {
       if (!confirm("Voulez-vous vraiment supprimer cette photo ?")) return;
-      const ok = await deleteWork(work.id, token);
+      const ok = await deleteWork(work.id, state.token);
 
       // Si la suppression est réussie, retire l'image du modal et de la galerie principale
       if (ok) {

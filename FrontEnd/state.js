@@ -3,6 +3,9 @@
 export const state = {
   works: [],
 
+  // Stockage du token pour les appels API nécessitant une authentification
+  token: localStorage.getItem("token"),
+
   // Variable pour suivre la catégorie active
   activeCategory: null,
 };
