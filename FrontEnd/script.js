@@ -1,4 +1,5 @@
 import { deleteWork, getCategories, getWorks, addWork } from "./api.js";
+import { displayWorks } from "./gallery.js";
 
 let works = [];
 // Lis le token dans le local storage
@@ -273,6 +274,8 @@ async function init() {
         modal.style.display = "none";
       }
     });
+
+    // Événement pour revenir à la galerie depuis le formulaire d'ajout
     editButton.addEventListener("click", function () {
       modalAdd.style.display = "none";
       modalGallery.style.display = "grid";
@@ -306,26 +309,6 @@ async function init() {
     form.appendChild(separatorForm);
     form.appendChild(submitButton);
   }
-}
-// Affiche les travaux dans la galerie
-
-function displayWorks(works) {
-  // Vide la galerie avant d'afficher les travaux
-  const gallery = document.querySelector(".gallery");
-  gallery.innerHTML = "";
-
-  // Affiche les travaux avec leurs images et leurs titres
-  works.forEach((work) => {
-    const figure = document.createElement("figure");
-    const image = document.createElement("img");
-    image.src = work.imageUrl;
-    image.alt = work.title;
-    const figcaption = document.createElement("figcaption");
-    figcaption.textContent = work.title;
-    figure.appendChild(image);
-    figure.appendChild(figcaption);
-    gallery.appendChild(figure);
-  });
 }
 
 // Affiche les catégories dans le filtre et ajoute les événements de filtrage
