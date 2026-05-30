@@ -1,15 +1,10 @@
+import { deleteWork, getCategories, getWorks, addWork } from "./api.js";
+
 let works = [];
 // Lis le token dans le local storage
 const token = localStorage.getItem("token");
 // Variable pour suivre la catégorie active
 let activeCategory = null;
-
-// Récupère les travaux depuis l'API
-async function getWorks() {
-  const response = await fetch("http://localhost:5678/api/works");
-  works = await response.json();
-  return works;
-}
 
 // ========== INITIALISATION ==========
 async function init() {
@@ -261,15 +256,10 @@ async function init() {
       formData.append("category", parseInt(categoryselect.value));
       titleError.style.display = "none";
       categoryError.style.display = "none";
-      const response = await fetch("http://localhost:5678/api/works", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
-      if (response.ok) {
-        const newWork = await response.json();
+
+      // Appelle la fonction d'ajout de travail et met à jour la galerie si l'ajout est réussi
+      const newWork = await addWork(formData, token);
+      if (newWork) {
         newWork.categoryId = parseInt(newWork.categoryId);
         works.push(newWork);
         titleInput.value = "";
@@ -338,13 +328,6 @@ function displayWorks(works) {
   });
 }
 
-// Récupère les catégories depuis l'API
-async function getCategories() {
-  const response = await fetch("http://localhost:5678/api/categories");
-  const categories = await response.json();
-  return categories;
-}
-
 // Affiche les catégories dans le filtre et ajoute les événements de filtrage
 function displayCategories(categories) {
   const filters = document.getElementById("filters");
@@ -410,17 +393,10 @@ function displayModalWorks(worksToDisplay) {
     // Événement de clic pour supprimer une image
     deleteButton.addEventListener("click", async function () {
       if (!confirm("Voulez-vous vraiment supprimer cette photo ?")) return;
-      const response = await fetch(
-        `http://localhost:5678/api/works/${work.id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      const ok = await deleteWork(work.id, token);
+
       // Si la suppression est réussie, retire l'image du modal et de la galerie principale
-      if (response.ok) {
+      if (ok) {
         figure.remove();
         works = works.filter((w) => w.id !== work.id);
         if (activeCategory) {
