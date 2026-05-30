@@ -2,6 +2,7 @@ import { deleteWork, getCategories, getWorks, addWork } from "./api.js";
 import { displayWorks, displayModalWorks } from "./gallery.js";
 import { state } from "./state.js";
 import { displayCategories } from "./filters.js";
+import { setupAuth } from "./auth.js";
 
 // Lis le token dans le local storage
 const token = localStorage.getItem("token");
@@ -13,14 +14,7 @@ async function init() {
   const categories = await getCategories();
   displayCategories(categories);
   if (token) {
-    // Modifie le lien de connexion en déconnexion
-    const loginLink = document.getElementById("login-link");
-    loginLink.textContent = "logout";
-    loginLink.addEventListener("click", function () {
-      localStorage.removeItem("token");
-      window.location.href = "login.html";
-    });
-
+    setupAuth();
     // Bannière de mode édition
     const editBanner = document.createElement("div");
     editBanner.id = "edit-banner";
