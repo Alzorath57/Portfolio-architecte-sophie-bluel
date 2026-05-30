@@ -1,16 +1,14 @@
 import { deleteWork, getCategories, getWorks, addWork } from "./api.js";
 import { displayWorks } from "./gallery.js";
+import { state } from "./state.js";
 
-let works = [];
 // Lis le token dans le local storage
 const token = localStorage.getItem("token");
-// Variable pour suivre la catégorie active
-let activeCategory = null;
 
 // ========== INITIALISATION ==========
 async function init() {
-  works = await getWorks();
-  displayWorks(works);
+  state.works = await getWorks();
+  displayWorks(state.works);
   const categories = await getCategories();
   displayCategories(categories);
   if (token) {
@@ -42,7 +40,7 @@ async function init() {
     document.body.appendChild(modal);
     editButton.addEventListener("click", function () {
       modal.style.display = "flex";
-      displayModalWorks(works);
+      displayModalWorks(state.works);
     });
 
     // Contenu du modal
@@ -262,13 +260,15 @@ async function init() {
       const newWork = await addWork(formData, token);
       if (newWork) {
         newWork.categoryId = parseInt(newWork.categoryId);
-        works.push(newWork);
+        state.works.push(newWork);
         titleInput.value = "";
         categoryselect.value = "";
-        if (activeCategory) {
-          displayWorks(works.filter((w) => w.categoryId === activeCategory));
+        if (state.activeCategory) {
+          displayWorks(
+            state.works.filter((w) => w.categoryId === state.activeCategory),
+          );
         } else {
-          displayWorks(works);
+          displayWorks(state.works);
         }
         modalAdd.style.display = "none";
         modal.style.display = "none";
@@ -320,8 +320,8 @@ function displayCategories(categories) {
   allBtn.textContent = "Tous";
   filters.appendChild(allBtn);
   allBtn.addEventListener("click", function () {
-    displayWorks(works);
-    activeCategory = null;
+    displayWorks(state.works);
+    state.activeCategory = null;
 
     // Met à jour l'état actif des boutons
     document.querySelectorAll(".filter-btn").forEach((btn) => {
@@ -339,11 +339,11 @@ function displayCategories(categories) {
 
     // Événement de clic pour filtrer les travaux par catégorie
     button.addEventListener("click", function () {
-      const filteredWorks = works.filter(
+      const filteredWorks = state.works.filter(
         (work) => work.categoryId === category.id,
       );
       displayWorks(filteredWorks);
-      activeCategory = category.id;
+      state.activeCategory = category.id;
       // Met à jour l'état actif des boutons
       document.querySelectorAll(".filter-btn").forEach((btn) => {
         btn.classList.remove("active");
@@ -381,11 +381,13 @@ function displayModalWorks(worksToDisplay) {
       // Si la suppression est réussie, retire l'image du modal et de la galerie principale
       if (ok) {
         figure.remove();
-        works = works.filter((w) => w.id !== work.id);
-        if (activeCategory) {
-          displayWorks(works.filter((w) => w.categoryId === activeCategory));
+        state.works = state.works.filter((w) => w.id !== work.id);
+        if (state.activeCategory) {
+          displayWorks(
+            state.works.filter((w) => w.categoryId === state.activeCategory),
+          );
         } else {
-          displayWorks(works);
+          displayWorks(state.works);
         }
       }
     });
