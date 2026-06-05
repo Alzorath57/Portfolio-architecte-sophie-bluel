@@ -162,7 +162,7 @@ export function setupForm(
     categoryError.style.display = "none";
 
     // Appelle la fonction d'ajout de travail et met à jour la galerie si l'ajout est réussi
-    const newWork = await addWork(formData, state.token);
+    const newWork = await addWork(formData);
     if (newWork) {
       newWork.categoryId = parseInt(newWork.categoryId);
       state.works.push(newWork);

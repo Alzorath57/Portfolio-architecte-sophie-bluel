@@ -8,4 +8,7 @@ export const state = {
 
   // Variable pour suivre la catégorie active
   activeCategory: null,
+
+  // URL de base pour les appels API
+  apiUrl: "http://localhost:5678/api",
 };

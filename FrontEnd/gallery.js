@@ -43,7 +43,7 @@ export function displayModalWorks(worksToDisplay) {
     // Événement de clic pour supprimer une image
     deleteButton.addEventListener("click", async function () {
       if (!confirm("Voulez-vous vraiment supprimer cette photo ?")) return;
-      const ok = await deleteWork(work.id, state.token);
+      const ok = await deleteWork(work.id);
 
       // Si la suppression est réussie, retire l'image du modal et de la galerie principale
       if (ok) {
