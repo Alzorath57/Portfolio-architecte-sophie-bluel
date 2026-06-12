@@ -3,6 +3,9 @@ import { state } from "./state.js";
 
 // Affiche les catégories dans le filtre et ajoute les événements de filtrage
 export function displayCategories(categories) {
+  if (localStorage.getItem("token")) {
+    return; // Ne pas afficher les filtres si l'utilisateur est connecté
+  }
   const filters = document.getElementById("filters");
   const allBtn = document.createElement("button");
   allBtn.classList.add("active");
