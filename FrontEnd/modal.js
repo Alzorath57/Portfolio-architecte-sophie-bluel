@@ -23,6 +23,16 @@ export function setupModal(editButton) {
   modalContent.appendChild(closeButton);
   closeButton.addEventListener("click", function () {
     modal.style.display = "none";
+    document.getElementById("title-form").value = "";
+    document.getElementById("category-form").value = "";
+    document.getElementById("image-form").value = "";
+    const existingImage = document.getElementById("file-image");
+    if (existingImage) existingImage.remove();
+    const submitButton = document.getElementById("submit-button");
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.style.backgroundColor = "#A7A7A7";
+    }
   });
 
   // Titre du modal

@@ -160,6 +160,7 @@ export function setupForm(
     const existingImage = document.getElementById("file-image");
     if (existingImage) existingImage.remove();
   });
+
   // Ajout des éléments dans la modale
   modalContent.appendChild(modalTitle);
   modalContent.appendChild(modalGallery);
