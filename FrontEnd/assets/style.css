@@ -351,7 +351,7 @@ nav li a:hover {
   border: none;
   background-color: #b3b3b3;
   height: 1px;
-  margin: 40px auto 0 auto;
+  margin: 40px auto 20px auto;
 }
 /* FORMULAIRE D'AJOUT DE PROJET */
 
@@ -361,6 +361,18 @@ nav li a:hover {
   align-items: center;
   gap: 20px;
 }
+
+#add-form > label {
+  align-self: flex-start;
+  margin-left: 105px;
+  margin-bottom: -5px;
+  margin-top: 10px;
+  font-family: "Work Sans";
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1;
+}
+
 #back-button {
   background-color: transparent;
   border: none;
@@ -421,12 +433,16 @@ nav li a:hover {
   width: 420px;
   height: 50px;
   font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 #category-form {
   width: 420px;
   height: 50px;
   font-size: 1.2em;
   cursor: pointer;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 #submit-button {
   font-family: "Syne";
